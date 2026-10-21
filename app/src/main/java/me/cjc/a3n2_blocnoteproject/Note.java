@@ -59,10 +59,12 @@ public class Note {
      * Constructeur de nouvelle note sans titre.
      */
     public Note() {
+        long maintenant = System.currentTimeMillis();
+
         this.id = idSuivant++;
         this.titre = "";
         this.contenu = "";
-        this.dateCreation = System.currentTimeMillis();
-        this.dateModification = System.currentTimeMillis();
+        this.dateCreation = maintenant;
+        this.dateModification = maintenant;
     }
 }
