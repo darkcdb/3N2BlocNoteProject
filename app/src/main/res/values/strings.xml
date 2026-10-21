@@ -3,4 +3,6 @@
     <string name="titreDeNote">Titre</string>
     <string name="titreApplication">Bloc Note</string>
     <string name="noteModifBtnDescription">Bouton de modification de note.</string>
+    <string name="carteSansTitreText">Sans titre</string>
+    <string name="carteSansApercuText">Contenu vide</string>
 </resources>

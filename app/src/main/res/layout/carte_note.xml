@@ -69,7 +69,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/carteCrayon"
+                android:id="@+id/carteModification"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:contentDescription="@string/noteModifBtnDescription"
