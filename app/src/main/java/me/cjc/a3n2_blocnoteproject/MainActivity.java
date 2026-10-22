@@ -16,9 +16,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+/**
+ * Activité principale de l'application.
+ */
 public class MainActivity extends AppCompatActivity {
-
+    /**
+     * Gestionnaire de la base de données.
+     */
     private GestionnaireBDNotes bd;
+    /**
+     * Adapteur de la liste des notes.
+     */
     private AdapteurDeNote adapteur;
 
     @Override
@@ -76,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         traiterIntentImport(intent);
     }
 
+    /**
+     * Affiche un popup de création de note.
+     * @param contenuInitial Contenu de la note.
+     * @param titreInitial Titre de la note.
+     */
     private void afficherNoteCreationPopup(String contenuInitial, String titreInitial) {
         View vue = getLayoutInflater().inflate(R.layout.popup_creation_note, null);
         EditText champTitre = vue.findViewById(R.id.champTitre);
@@ -96,7 +109,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Affiche un menu de modification de note.
+     * @param note Note à modifier.
+     */
     private void afficherMenuModification(Note note) {
         String[] options = {
                 getString(R.string.titreLayoutModificationTitre),
@@ -128,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Affiche un popup de modification de verrouillage de note.
+     * @param note Note à modifier.
+     * @param verouiller Status de la note. (Vérouiller ou non)
+     */
     private void afficherModificationVerrouillage(Note note, boolean verouiller) {
         View vue = getLayoutInflater().inflate(R.layout.popup_verrou, null);
         EditText champNip = vue.findViewById(R.id.champNip);
@@ -174,6 +195,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Affiche un popup de suppression de note.
+     * @param note Note à supprimer.
+     */
     private void afficherModificationSuppression(Note note) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle(getString(R.string.titreLayoutSupprimerNote))
@@ -185,6 +210,10 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Affiche un popup de modification de titre de note.
+     * @param note Note à modifier.
+     */
     private void afficherModificationTitre(Note note) {
         View vue = getLayoutInflater().inflate(R.layout.popup_modification_titre, null);
         EditText champTitre = vue.findViewById(R.id.champTitre);
@@ -204,6 +233,10 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Traite l'intent d'import.
+     * @param intention Intention à traiter.
+     */
     private void traiterIntentImport(Intent intention) {
         if (intention == null) return;
 
@@ -222,6 +255,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Génère un titre à partir du contenu de la note.
+     * @param texte Contenu de la note.
+     * @return Retourne une suggestion de titre.
+     */
     private String suggererTitre(String texte) {
         String premiereLigne = texte.trim().split("\\R", 2)[0].trim();
         return premiereLigne.length() > 30

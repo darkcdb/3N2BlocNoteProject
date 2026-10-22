@@ -31,16 +31,38 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Locale;
 
+/**
+ * Activité de l'éditeur de note.
+ */
 public class EditeurActivity extends AppCompatActivity {
-
+    /**
+     * Gestionnaire de la base de données.
+     */
     private GestionnaireBDNotes bd;
+    /**
+     * Note à éditer.
+     */
     private Note note;
+    /**
+     * Champ de contenu de la note.
+     */
     private EditText champContenu;
-
+    /**
+     * Historique des changements de contenu.
+     */
     private final HistoriqueMementos historique = new HistoriqueMementos(10);
+    /**
+     * Memento avant le changement de contenu.
+     */
     private MementoTexte avant;
+    /**
+     * Flag de restauration de contenu.
+     */
     private boolean restauration = false;
 
+    /**
+     * Demande de permission de localisation.
+     */
     private final ActivityResultLauncher<String[]> demandePermission =
             registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), resultats -> {
                 if (Boolean.TRUE.equals(resultats.get(Manifest.permission.ACCESS_FINE_LOCATION))) {
@@ -50,6 +72,9 @@ public class EditeurActivity extends AppCompatActivity {
                 }
             });
 
+    /**
+     * Constructeur de l'activité.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -119,17 +144,30 @@ public class EditeurActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Compte le nombre de mots dans un texte.
+     * @param texte Contenu de la note actuelle.
+     * @return Retourne le nombre de mots dans le texte.
+     */
     private int compterMots(String texte) {
         String t = texte.trim();
         return t.isEmpty() ? 0 : t.split("\\s+").length;
     }
 
+    /**
+     * Créer un memento de texte.
+     * @return Retourne un nouvel Objet MementoTexte.
+     */
     private MementoTexte creerMemento() {
         return new MementoTexte(
                 champContenu.getText().toString(),
                 champContenu.getSelectionStart());
     }
 
+    /**
+     * Restaurer le contenu de la note.
+     * @param memento Memento à restaurer.
+     */
     private void restaurer(MementoTexte memento) {
         restauration = true;
         champContenu.setText(memento.getTexte());
@@ -138,6 +176,9 @@ public class EditeurActivity extends AppCompatActivity {
         restauration = false;
     }
 
+    /**
+     * Annuler le dernier changement du texte.
+     */
     private void annuler() {
         MementoTexte memento = historique.annuler(creerMemento());
         if (memento != null) {
@@ -145,6 +186,9 @@ public class EditeurActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Refaire le dernier changement du texte.
+     */
     private void refaire() {
         MementoTexte memento = historique.refaire(creerMemento());
         if (memento != null) {
@@ -152,6 +196,9 @@ public class EditeurActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Fermer la note avec vérification de sauvegarde.
+     */
     private void fermerNote() {
         String lContenu = champContenu.getText().toString();
 
@@ -166,6 +213,9 @@ public class EditeurActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Enregistrer le contenu de la note dans la BD.
+     */
     private void enregistrer() {
         String lContenu = champContenu.getText().toString();
         if (!lContenu.equals(note.contenu)) {
@@ -175,6 +225,9 @@ public class EditeurActivity extends AppCompatActivity {
         Toast.makeText(this, getString(R.string.sauvegardeEffectuee), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Vérification de permissions, demande de permissions ou redirection vers obtenir la position GPS de l'appareil.
+     */
     private void demanderPosition() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -186,6 +239,9 @@ public class EditeurActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Méthode qui obtien la position GPS de l'appareil avant d'appeler la méthode insererPosition.
+     */
     @SuppressLint("MissingPermission")
     private void obtenirPosition() {
         LocationManager gestionnaire = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -218,6 +274,10 @@ public class EditeurActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Insère la position GPS dans le contenu de la note.
+     * @param location
+     */
     private void insererPosition(Location location) {
         String latitude = String.format(Locale.getDefault(), "%.6f", location.getLatitude());
         String longitude = String.format(Locale.getDefault(), "%.6f", location.getLongitude());

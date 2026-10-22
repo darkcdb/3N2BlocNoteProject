@@ -80,6 +80,11 @@ public class GestionnaireBDNotes extends SQLiteOpenHelper {
         getWritableDatabase().update("notes", valeurs, "id=?", new String[]{String.valueOf(note.id)});
     }
 
+    /**
+     * Méthode pour définir le NIP d'une note.
+     * @param id id de la note a modifier.
+     * @param nipHash NIPHash à définir pour la note spécifié.
+     */
     public void definirNip(int id, String nipHash) {
         ContentValues valeurs = new ContentValues();
         valeurs.put("nipHash", nipHash);

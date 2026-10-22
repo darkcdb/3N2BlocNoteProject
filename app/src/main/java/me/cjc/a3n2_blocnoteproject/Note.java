@@ -25,7 +25,7 @@ public class Note {
      */
     public long dateModification;
     /**
-     * La hash du nip de la note. nill = Pas vérouillé
+     * La hash du nip de la note. null = Pas vérouillé
      */
     public String nipHash;
     /**
@@ -75,6 +75,10 @@ public class Note {
         this.nipHash = null;
     }
 
+    /**
+     * Vérifie si la note est vérouillée.
+     * @return Retourne true si la note est vérouillée, false sinon.
+     */
     public boolean estVerrouillee() {
         return nipHash != null && !nipHash.isEmpty();
     }
