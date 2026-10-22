@@ -57,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         recycler.setAdapter(adapteur);
-        findViewById(R.id.boutonAjouter).setOnClickListener(v -> afficherNoteCreationPopup());
+        findViewById(R.id.boutonAjouter).setOnClickListener(v -> afficherNoteCreationPopup("", ""));
+        if (savedInstanceState == null) {
+            traiterIntentImport(getIntent());
+        }
     }
 
     @Override
@@ -66,9 +69,17 @@ public class MainActivity extends AppCompatActivity {
         adapteur.setNotes(bd.obtenirTous());
     }
 
-    private void afficherNoteCreationPopup() {
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        traiterIntentImport(intent);
+    }
+
+    private void afficherNoteCreationPopup(String contenuInitial, String titreInitial) {
         View vue = getLayoutInflater().inflate(R.layout.popup_creation_note, null);
         EditText champTitre = vue.findViewById(R.id.champTitre);
+        champTitre.setText(titreInitial);
 
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.titreLayoutPopupCreation)
@@ -77,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.popupCreationCree, (dialogue, bouton) -> {
                     String lTitre = champTitre.getText().toString().trim();
                     Note note = new Note(lTitre);
+                    note.contenu = contenuInitial;
                     bd.ajouter(note);
                     adapteur.setNotes(bd.obtenirTous());
                 })
@@ -190,5 +202,30 @@ public class MainActivity extends AppCompatActivity {
                     adapteur.setNotes(bd.obtenirTous());
                 })
                 .show();
+    }
+
+    private void traiterIntentImport(Intent intention) {
+        if (intention == null) return;
+
+        String action = intention.getAction();
+        CharSequence texte = null;
+
+        if (Intent.ACTION_SEND.equals(action) && "text/plain".equals(intention.getType())) {
+            texte = intention.getCharSequenceExtra(Intent.EXTRA_TEXT);
+        } else if (Intent.ACTION_PROCESS_TEXT.equals(action)) {
+            texte = intention.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+        }
+
+        if (texte != null && !texte.toString().trim().isEmpty()) {
+            String contenu = texte.toString();
+            afficherNoteCreationPopup(contenu, suggererTitre(contenu));
+        }
+    }
+
+    private String suggererTitre(String texte) {
+        String premiereLigne = texte.trim().split("\\R", 2)[0].trim();
+        return premiereLigne.length() > 30
+                ? premiereLigne.substring(0, 30).trim()
+                : premiereLigne;
     }
 }

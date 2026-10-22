@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">3N2-NotePad</string>
+    <string name="titreDeNote">Title</string>
+    <string name="titreApplication">Note Pad</string>
+    <string name="noteModifBtnDescription">Note modification button.</string>
+    <string name="carteSansTitreText">No title</string>
+    <string name="carteSansApercuText">Empty content</string>
+    <string name="carteModifieText">Modified : %s</string>
+    <string name="carteCreeText">Created : %s</string>
+    <string name="boutonAjouterDescription">Note creation button</string>
+    <string name="dialogueHintTitre">Note title</string>
+    <string name="popupAnnuler">Cancel</string>
+    <string name="popupCreationCree">Create</string>
+    <string name="popupEnregistrer">Save</string>
+    <string name="titreLayoutPopupCreation">Create a new note</string>
+    <string name="titreLayoutModificationNote">Note modification</string>
+    <string name="titreLayoutModificationTitre">Title modification</string>
+    <string name="titreLayoutSupprimerNote">Note deletion</string>
+    <string name="titreLayoutVerrNote">Note lock</string>
+    <string name="titreLayoutDeVerrNote">Note unlock</string>
+    <string name="OptionVerrouiller">Lock</string>
+    <string name="OptionDeVerrouiller">Unlock</string>
+    <string name="OptionSupprimerNote">Delete</string>
+    <string name="dialogueHintNip">PIN (4 to 5 numbers)</string>
+    <string name="dialogueHintModificationTitre">New note title</string>
+    <string name="popupNipErreur">The PIN must be between 4 or 5 numbers</string>
+    <string name="popupNipIncorrect">Invalid PIN</string>
+    <string name="impossibleVerrouiller">Note must be unlocked to perform this action</string>
+    <string name="carteVerrouilleeText">Unlock the note to see the preview</string>
+    <string name="titreNoteTemporaire">Note title</string>
+    <string name="EditorUndoOption">Undo</string>
+    <string name="EditorRedoOption">Redo</string>
+    <string name="EditorlocationOption">GPS</string>
+    <string name="EditorSaveOption">Save</string>
+    <string name="editeurHintContenu">Text...</string>
+    <string name="boutonRetourDescription">Return to main page</string>
+    <string name="sauvegardeEffectuee">Note saved</string>
+    <string name="titreFermetureNoteSansSauvegarde">You are about to close this note without saving, are you sure?</string>
+    <string name="popupFermer">Exit</string>
+    <string name="positionTexte">Latitude : %1$s, Longitude : %2$s</string>
+    <string name="positionRecherche">Searching current position...</string>
+    <string name="positionIntrouvable">Position not found, try again outside.</string>
+    <string name="gpsDesactive">Turn on your device\'s GPS.</string>
+    <string name="permissionRefusee">Permissions to gather GPS data denied.</string>
+    <string name="importerDansNote">Import into note</string>
+</resources>

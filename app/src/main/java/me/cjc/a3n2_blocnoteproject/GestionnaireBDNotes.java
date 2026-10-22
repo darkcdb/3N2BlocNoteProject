@@ -39,16 +39,13 @@ public class GestionnaireBDNotes extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //db.execSQL("DROP TABLE IF EXISTS notes");
-        //onCreate(db);
-        if (oldVersion < 2) {
-            db.execSQL("ALTER TABLE notes ADD COLUMN nipHash TEXT");
-        }
+        db.execSQL("DROP TABLE IF EXISTS notes");
+        onCreate(db);
     }
 
     /**
      * Méthode pour ajouter une note à la base de données.
-     * @param note La note a ajouter.
+     * @param note La note à ajouter.
      */
     public void ajouter(Note note) {
         ContentValues valeurs = new ContentValues();

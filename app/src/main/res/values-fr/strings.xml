@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">3N2-BlocNote</string>
+    <string name="titreDeNote">Titre</string>
+    <string name="titreApplication">Bloc Note</string>
+    <string name="noteModifBtnDescription">Bouton de modification de note.</string>
+    <string name="carteSansTitreText">Sans titre</string>
+    <string name="carteSansApercuText">Contenu vide</string>
+    <string name="carteModifieText">Modifié :  %s</string>
+    <string name="carteCreeText">Créé :  %s</string>
+    <string name="boutonAjouterDescription">Bouton de création de note</string>
+    <string name="dialogueHintTitre">Titre de la note</string>
+    <string name="popupAnnuler">Annuler</string>
+    <string name="popupCreationCree">Crée</string>
+    <string name="popupEnregistrer">Enregistrer</string>
+    <string name="titreLayoutPopupCreation">Crée une nouvelle note</string>
+    <string name="titreLayoutModificationNote">Modification de note</string>
+    <string name="titreLayoutModificationTitre">Modification du titre</string>
+    <string name="titreLayoutSupprimerNote">Supprimer la note</string>
+    <string name="titreLayoutVerrNote">Verrouiller la note</string>
+    <string name="titreLayoutDeVerrNote">Déverrouiller la note</string>
+    <string name="OptionVerrouiller">Verrouiller</string>
+    <string name="OptionDeVerrouiller">Déverrouiller</string>
+    <string name="OptionSupprimerNote">Supprimer</string>
+    <string name="dialogueHintNip">NIP (4 ou 5 chiffres)</string>
+    <string name="dialogueHintModificationTitre">Nouveau titre de la note</string>
+    <string name="popupNipErreur">Le NIP doit être entre 4 et 5 chiffres</string>
+    <string name="popupNipIncorrect">Le NIP est invalide</string>
+    <string name="impossibleVerrouiller">La note doit être déverouillé pour effectué cette action</string>
+    <string name="carteVerrouilleeText">Veuillez déverouiller la note pour obtenir un aperçu.</string>
+    <string name="titreNoteTemporaire">Titre de la note</string>
+    <string name="EditorUndoOption">Retour</string>
+    <string name="EditorRedoOption">Refaire</string>
+    <string name="EditorlocationOption">GPS</string>
+    <string name="EditorSaveOption">Sauvegarde</string>
+    <string name="editeurHintContenu">Texte...</string>
+    <string name="boutonRetourDescription">Retour a la page principale.</string>
+    <string name="sauvegardeEffectuee">La note à été enregistré</string>
+    <string name="titreFermetureNoteSansSauvegarde">Vous être sur le point de fermer la note sans sauvegardé, êtes vous sûr?</string>
+    <string name="popupFermer">Sortir</string>
+    <string name="positionTexte">Latitude : %1$s, Longitude : %2$s</string>
+    <string name="positionRecherche">Recherche de la position…</string>
+    <string name="positionIntrouvable">Position introuvable. Réessayez à l\'extérieur.</string>
+    <string name="gpsDesactive">Activez la localisation (GPS) de l\'appareil.</string>
+    <string name="permissionRefusee">Permission de localisation refusée.</string>
+    <string name="importerDansNote">Importer dans note</string>
+
+
+</resources>
