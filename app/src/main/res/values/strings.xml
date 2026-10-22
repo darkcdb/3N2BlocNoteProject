@@ -11,14 +11,18 @@
     <string name="dialogueHintTitre">Titre de la note</string>
     <string name="popupAnnuler">Annuler</string>
     <string name="popupCreationCree">Crée</string>
+    <string name="popupEnregistrer">Enregistrer</string>
     <string name="titreLayoutPopupCreation">Crée une nouvelle note</string>
     <string name="titreLayoutModificationNote">Modification de note</string>
     <string name="titreLayoutModificationTitre">Modification du titre</string>
     <string name="titreLayoutSupprimerNote">Supprimer la note</string>
     <string name="titreLayoutVerrNote">Verrouiller la note</string>
     <string name="titreLayoutDeVerrNote">Déverrouiller la note</string>
+    <string name="OptionVerrouiller">Verrouiller</string>
+    <string name="OptionDeVerrouiller">Déverrouiller</string>
     <string name="OptionSupprimerNote">Supprimer</string>
     <string name="dialogueHintNip">NIP (4 ou 5 chiffres)</string>
     <string name="dialogueHintModificationTitre">Nouveau titre de la note</string>
-    <string name="popupNipRefuse">Le NIP doit être entre 4 et 5 chiffres.</string>
+    <string name="popupNipErreur">Le NIP doit être entre 4 et 5 chiffres.</string>
+    <string name="popupNipIncorrect">Le NIP est invalide.</string>
 </resources>

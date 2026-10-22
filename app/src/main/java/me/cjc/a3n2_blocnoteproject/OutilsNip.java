@@ -15,4 +15,8 @@ public class OutilsNip {
             throw new RuntimeException(e);
         }
     }
+
+    public static boolean estMemeHash(String Hash1, String Hash2) {
+        return Hash1.equals(Hash2);
+    }
 }

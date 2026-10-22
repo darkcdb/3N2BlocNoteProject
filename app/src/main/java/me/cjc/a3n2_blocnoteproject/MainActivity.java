@@ -109,34 +109,57 @@ public class MainActivity extends AppCompatActivity {
                             afficherModificationSuppression(note);
                             break;
                         case 2:
-                            afficherModificationVerrouillage(note);
+                            afficherModificationVerrouillage(note, !note.estVerrouillee());
                             break;
                     }
                 })
                 .show();
     }
 
-    private void afficherModificationVerrouillage(Note note) {
-        View vue = getLayoutInflater().inflate(R.layout.popup_modification_verrou, null);
+    private void afficherModificationVerrouillage(Note note, boolean verouiller) {
+        View vue = getLayoutInflater().inflate(R.layout.popup_verrou, null);
         EditText champNip = vue.findViewById(R.id.champNip);
         boolean estVerrouillee = note.estVerrouillee();
         String lTitre = (estVerrouillee) ? getString(R.string.titreLayoutDeVerrNote) : getString(R.string.titreLayoutVerrNote);
+        int lPosBouton = (estVerrouillee) ? R.string.OptionDeVerrouiller : R.string.OptionVerrouiller;
 
-        new MaterialAlertDialogBuilder(this)
-                .setTitle(lTitre)
-                .setView(vue)
-                .setNegativeButton(R.string.popupAnnuler, null)
-                .setPositiveButton(R.string.popupCreationCree, (dialogue, bouton) -> {
-                    String lNip = champNip.getText().toString().trim();
-                    if ((lNip.length() == 4 || lNip.length() == 5) && Integer.parseInt(lNip) > 0) {
-                        String lNipHash = OutilsNip.hash(note.id, lNip);
-                        bd.definirNip(note.id, lNipHash);
-                        adapteur.setNotes(bd.obtenirTous());
-                    } else {
-                        Toast.makeText(this, getString(R.string.popupNipRefuse), Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .show();
+        if (verouiller) {
+            new MaterialAlertDialogBuilder(this)
+                    .setTitle(lTitre)
+                    .setView(vue)
+                    .setNegativeButton(R.string.popupAnnuler, null)
+                    .setPositiveButton(lPosBouton, (dialogue, bouton) -> {
+                        String lNip = champNip.getText().toString().trim();
+                        if ((lNip.length() == 4 || lNip.length() == 5) && Integer.parseInt(lNip) > 0) {
+                            String lNipHash = OutilsNip.hash(note.id, lNip);
+                            bd.definirNip(note.id, lNipHash);
+                            adapteur.setNotes(bd.obtenirTous());
+                        } else {
+                            Toast.makeText(this, getString(R.string.popupNipErreur), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .show();
+        } else {
+            new MaterialAlertDialogBuilder(this)
+                    .setTitle(lTitre)
+                    .setView(vue)
+                    .setNegativeButton(R.string.popupAnnuler, null)
+                    .setPositiveButton(lPosBouton, (dialogue, bouton) -> {
+                        String lNip = champNip.getText().toString().trim();
+                        if ((lNip.length() == 4 || lNip.length() == 5) && Integer.parseInt(lNip) > 0) {
+                            String lNipHash = OutilsNip.hash(note.id, lNip);
+                            if (OutilsNip.estMemeHash(lNipHash, note.nipHash)) {
+                                bd.definirNip(note.id, null);
+                                adapteur.setNotes(bd.obtenirTous());
+                            } else {
+                                Toast.makeText(this, getString(R.string.popupNipIncorrect), Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(this, getString(R.string.popupNipErreur), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .show();
+        }
     }
 
     private void afficherModificationSuppression(Note note) {
@@ -153,14 +176,17 @@ public class MainActivity extends AppCompatActivity {
     private void afficherModificationTitre(Note note) {
         View vue = getLayoutInflater().inflate(R.layout.popup_modification_titre, null);
         EditText champTitre = vue.findViewById(R.id.champTitre);
+        champTitre.setText(note.titre);
 
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.titreLayoutModificationTitre)
                 .setView(vue)
                 .setNegativeButton(R.string.popupAnnuler, null)
-                .setPositiveButton(R.string.popupCreationCree, (dialogue, bouton) -> {
-                    note.titre = champTitre.getText().toString().trim();
-                    bd.modifier(note);
+                .setPositiveButton(R.string.popupEnregistrer, (dialogue, bouton) -> {
+                    String lTitre = champTitre.getText().toString().trim();
+                    Note note2 = new Note(note.id, lTitre, note.contenu,
+                            note.dateCreation, note.dateModification, note.nipHash);
+                    bd.modifier(note2);
                     adapteur.setNotes(bd.obtenirTous());
                 })
                 .show();

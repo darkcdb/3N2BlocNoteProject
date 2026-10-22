@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AdapteurDeNote extends RecyclerView.Adapter<AdapteurDeNote.NoteHolder> {
     /**
@@ -126,7 +127,8 @@ public class AdapteurDeNote extends RecyclerView.Adapter<AdapteurDeNote.NoteHold
                 Note n = nouvellesNotes.get(nouvelle);
                 return a.titre.equals(n.titre)
                         && a.contenu.equals(n.contenu)
-                        && a.dateModification == n.dateModification;
+                        && a.dateModification == n.dateModification
+                        && Objects.equals(a.nipHash, n.nipHash);
             }
         });
 
