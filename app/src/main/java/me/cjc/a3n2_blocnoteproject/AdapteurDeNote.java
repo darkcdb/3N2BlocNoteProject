@@ -9,8 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -62,20 +65,38 @@ public class AdapteurDeNote extends RecyclerView.Adapter<AdapteurDeNote.NoteHold
     public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
         Context contexte = holder.itemView.getContext();
         Note note = notes.get(position);
+        boolean verrouillee = note.estVerrouillee();
 
         String lTitre = note.titre.trim().isEmpty()
                 ? contexte.getString(R.string.carteSansTitreText)
                 : note.titre;
 
-        String lApercu = note.contenu.replaceAll("\\s+", " ").trim();
-        if (lApercu.isEmpty()) {
-            lApercu = contexte.getString(R.string.carteSansApercuText);
+        String lApercu;
+        if (verrouillee) {
+            lApercu = contexte.getString(R.string.carteVerrouilleeText);
+        } else {
+            lApercu = note.contenu.replaceAll("\\s+", " ").trim();
+            if (lApercu.isEmpty()) {
+                lApercu = contexte.getString(R.string.carteSansApercuText);
+            }
         }
 
         holder.titre.setText(lTitre);
         holder.apercu.setText(lApercu);
         holder.dateModification.setText(contexte.getString(R.string.carteModifieText, sdf.format(note.dateModification)));
         holder.dateCreation.setText(contexte.getString(R.string.carteCreeText, sdf.format(note.dateCreation)));
+
+        holder.carte.setCardBackgroundColor(ContextCompat.getColor(contexte,
+                verrouillee ? R.color.carteVerrouilleeFond : R.color.carteFond));
+        holder.titre.setBackgroundColor(ContextCompat.getColor(contexte,
+                verrouillee ? R.color.carteVerrouilleeTitreFond : R.color.carteTitreFond));
+
+        int couleurTexte = ContextCompat.getColor(contexte,
+                verrouillee ? R.color.carteVerrouilleeTexte : R.color.carteTexte);
+        holder.titre.setTextColor(couleurTexte);
+        holder.apercu.setTextColor(couleurTexte);
+        holder.dateModification.setTextColor(couleurTexte);
+        holder.dateCreation.setTextColor(couleurTexte);
 
         holder.itemView.setOnClickListener(v -> listener.onClickNote(note));
         holder.modifBtn.setOnClickListener(v -> listener.onClickModifier(note));
@@ -143,9 +164,11 @@ public class AdapteurDeNote extends RecyclerView.Adapter<AdapteurDeNote.NoteHold
     public static class NoteHolder extends RecyclerView.ViewHolder {
         TextView titre, apercu, dateModification, dateCreation;
         ImageView modifBtn;
+        MaterialCardView carte;
 
         NoteHolder(View vue) {
             super(vue);
+            carte = (MaterialCardView) vue;
             titre = vue.findViewById(R.id.carteTitre);
             apercu = vue.findViewById(R.id.carteAppercu);
             dateModification = vue.findViewById(R.id.carteDateModification);

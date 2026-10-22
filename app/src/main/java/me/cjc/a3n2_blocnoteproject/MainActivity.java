@@ -42,9 +42,13 @@ public class MainActivity extends AppCompatActivity {
         adapteur = new AdapteurDeNote(new AdapteurDeNote.Listener() {
             @Override
             public void onClickNote(Note note) {
-                Intent intention = new Intent(MainActivity.this, EditeurActivity.class);
-                intention.putExtra("idNote", note.id);
-                startActivity(intention);
+                if (note.estVerrouillee()) {
+                    Toast.makeText(MainActivity.this, getString(R.string.impossibleVerrouiller), Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intention = new Intent(MainActivity.this, EditeurActivity.class);
+                    intention.putExtra("idNote", note.id);
+                    startActivity(intention);
+                }
             }
             @Override
             public void onClickModifier(Note note) {
@@ -103,7 +107,11 @@ public class MainActivity extends AppCompatActivity {
                 .setItems(options, (dialogue, choix) -> {
                     switch (choix) {
                         case 0:
-                            afficherModificationTitre(note);
+                            if (!note.estVerrouillee()) {
+                                afficherModificationTitre(note);
+                            } else {
+                                Toast.makeText(this, getString(R.string.impossibleVerrouiller), Toast.LENGTH_SHORT).show();
+                            }
                             break;
                         case 1:
                             afficherModificationSuppression(note);

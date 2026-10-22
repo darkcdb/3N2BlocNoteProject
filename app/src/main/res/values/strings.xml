@@ -25,4 +25,6 @@
     <string name="dialogueHintModificationTitre">Nouveau titre de la note</string>
     <string name="popupNipErreur">Le NIP doit être entre 4 et 5 chiffres.</string>
     <string name="popupNipIncorrect">Le NIP est invalide.</string>
+    <string name="impossibleVerrouiller">La note doit être déverouillé pour effectué cette action</string>
+    <string name="carteVerrouilleeText">Veuillez déverouiller la note pour obtenir un aperçu.</string>
 </resources>

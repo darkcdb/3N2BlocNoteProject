@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="carteFond">#FFFFFF</color>
+    <color name="carteTitreFond">#E8EAF6</color>
+    <color name="carteTexte">#212121</color>
+
+    <color name="carteVerrouilleeFond">#E0E0E0</color>
+    <color name="carteVerrouilleeTitreFond">#BDBDBD</color>
+    <color name="carteVerrouilleeTexte">#757575</color>
 </resources>
