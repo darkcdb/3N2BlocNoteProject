@@ -5,4 +5,6 @@
     <string name="noteModifBtnDescription">Bouton de modification de note.</string>
     <string name="carteSansTitreText">Sans titre</string>
     <string name="carteSansApercuText">Contenu vide</string>
+    <string name="carteModifieText">Modifié : %s</string>
+    <string name="carteCreeText">Créé : %s</string>
 </resources>
