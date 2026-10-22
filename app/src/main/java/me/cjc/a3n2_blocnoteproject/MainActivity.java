@@ -56,14 +56,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        adapteur = new AdapteurDeNote(note -> {
-            Intent intention = new Intent(this, EditeurActivity.class);
-            intention.putExtra("idNote", note.id);
-            startActivity(intention);
-        });
-         */
-
         recycler.setAdapter(adapteur);
         findViewById(R.id.boutonAjouter).setOnClickListener(v -> afficherNoteCreationPopup());
     }

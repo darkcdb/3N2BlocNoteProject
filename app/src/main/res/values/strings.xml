@@ -27,4 +27,11 @@
     <string name="popupNipIncorrect">Le NIP est invalide.</string>
     <string name="impossibleVerrouiller">La note doit être déverouillé pour effectué cette action</string>
     <string name="carteVerrouilleeText">Veuillez déverouiller la note pour obtenir un aperçu.</string>
+    <string name="titreNoteTemporaire">Titre de la note</string>
+    <string name="EditorUndoOption">Undo</string>
+    <string name="EditorRedoOption">Redo</string>
+    <string name="EditorlocationOption">Position GPS</string>
+    <string name="EditorSaveOption">Sauvegarde</string>
+    <string name="editeurHintContenu">Texte...</string>
+    <string name="boutonRetourDescription">Retour a la page principale.</string>
 </resources>
