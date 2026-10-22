@@ -29,7 +29,8 @@ public class AdapteurDeNote extends RecyclerView.Adapter<AdapteurDeNote.NoteHold
      * Interface de type Listener pour la gestion du clic sur une note.
      */
     public interface Listener {
-        void onClick(Note note);
+        void onClickNote(Note note);
+        void onClickModifier(Note note);
     }
 
     /**
@@ -75,8 +76,8 @@ public class AdapteurDeNote extends RecyclerView.Adapter<AdapteurDeNote.NoteHold
         holder.dateModification.setText(contexte.getString(R.string.carteModifieText, sdf.format(note.dateModification)));
         holder.dateCreation.setText(contexte.getString(R.string.carteCreeText, sdf.format(note.dateCreation)));
 
-        holder.itemView.setOnClickListener(v -> listener.onClick(note));
-        holder.modifBtn.setOnClickListener(v -> listener.onClick(note));
+        holder.itemView.setOnClickListener(v -> listener.onClickNote(note));
+        holder.modifBtn.setOnClickListener(v -> listener.onClickModifier(note));
     }
 
     /**

@@ -25,6 +25,10 @@ public class Note {
      */
     public long dateModification;
     /**
+     * La hash du nip de la note. nill = Pas vérouillé
+     */
+    public String nipHash;
+    /**
      * Id du prochain objet Note à créer.
      */
     private static int idSuivant = 1;
@@ -32,12 +36,13 @@ public class Note {
     /**
      * Constructeur de note éxistante pour le chargement a partir de la base de données.
      */
-    public Note(int id, String titre, String contenu, long dateCreation, long dateModification) {
+    public Note(int id, String titre, String contenu, long dateCreation, long dateModification, String nipHash) {
         this.id = id;
         this.titre = titre;
         this.contenu = contenu;
         this.dateCreation = dateCreation;
         this.dateModification = dateModification;
+        this.nipHash = nipHash;
 
         if (id >= idSuivant) idSuivant = id + 1;
     }
@@ -53,6 +58,7 @@ public class Note {
         this.contenu = "";
         this.dateCreation = maintenant;
         this.dateModification = maintenant;
+        this.nipHash = null;
     }
 
     /**
@@ -66,5 +72,10 @@ public class Note {
         this.contenu = "";
         this.dateCreation = maintenant;
         this.dateModification = maintenant;
+        this.nipHash = null;
+    }
+
+    public boolean estVerrouillee() {
+        return nipHash != null && !nipHash.isEmpty();
     }
 }

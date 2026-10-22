@@ -5,6 +5,20 @@
     <string name="noteModifBtnDescription">Bouton de modification de note.</string>
     <string name="carteSansTitreText">Sans titre</string>
     <string name="carteSansApercuText">Contenu vide</string>
-    <string name="carteModifieText">Modifié : %s</string>
-    <string name="carteCreeText">Créé : %s</string>
+    <string name="carteModifieText">Modifié : \n%s</string>
+    <string name="carteCreeText">Créé : \n%s</string>
+    <string name="boutonAjouterDescription">Bouton de création de note</string>
+    <string name="dialogueHintTitre">Titre de la note</string>
+    <string name="popupAnnuler">Annuler</string>
+    <string name="popupCreationCree">Crée</string>
+    <string name="titreLayoutPopupCreation">Crée une nouvelle note</string>
+    <string name="titreLayoutModificationNote">Modification de note</string>
+    <string name="titreLayoutModificationTitre">Modification du titre</string>
+    <string name="titreLayoutSupprimerNote">Supprimer la note</string>
+    <string name="titreLayoutVerrNote">Verrouiller la note</string>
+    <string name="titreLayoutDeVerrNote">Déverrouiller la note</string>
+    <string name="OptionSupprimerNote">Supprimer</string>
+    <string name="dialogueHintNip">NIP (4 ou 5 chiffres)</string>
+    <string name="dialogueHintModificationTitre">Nouveau titre de la note</string>
+    <string name="popupNipRefuse">Le NIP doit être entre 4 et 5 chiffres.</string>
 </resources>

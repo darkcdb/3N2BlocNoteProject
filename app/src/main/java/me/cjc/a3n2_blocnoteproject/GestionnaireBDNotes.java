@@ -19,7 +19,7 @@ public class GestionnaireBDNotes extends SQLiteOpenHelper {
      * @param context Contexte de la BD.
      */
     public GestionnaireBDNotes(@Nullable Context context) {
-        super(context, "BDNotes", null, 1);
+        super(context, "BDNotes", null, 2);
     }
 
     /**
@@ -28,7 +28,7 @@ public class GestionnaireBDNotes extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE notes (id INTEGER PRIMARY KEY, titre TEXT, contenu TEXT, dateCreation INTEGER, dateModification INTEGER)");
+        db.execSQL("CREATE TABLE notes (id INTEGER PRIMARY KEY, titre TEXT, contenu TEXT, dateCreation INTEGER, dateModification INTEGER, nipHash TEXT)");
     }
 
     /**
@@ -39,8 +39,11 @@ public class GestionnaireBDNotes extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS notes");
-        onCreate(db);
+        //db.execSQL("DROP TABLE IF EXISTS notes");
+        //onCreate(db);
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE notes ADD COLUMN nipHash TEXT");
+        }
     }
 
     /**
@@ -54,6 +57,7 @@ public class GestionnaireBDNotes extends SQLiteOpenHelper {
         valeurs.put("contenu", note.contenu);
         valeurs.put("dateCreation", note.dateCreation);
         valeurs.put("dateModification", note.dateModification);
+        valeurs.put("nipHash", note.nipHash);
         getWritableDatabase().insert("notes", null, valeurs);
     }
 
@@ -79,13 +83,19 @@ public class GestionnaireBDNotes extends SQLiteOpenHelper {
         getWritableDatabase().update("notes", valeurs, "id=?", new String[]{String.valueOf(note.id)});
     }
 
+    public void definirNip(int id, String nipHash) {
+        ContentValues valeurs = new ContentValues();
+        valeurs.put("nipHash", nipHash);
+        getWritableDatabase().update("notes", valeurs, "id=?", new String[]{String.valueOf(id)});
+    }
+
     /**
      * Méthode pour créer un objet Note à partir d'un curseur de BD.
      * @param curseur Le curseur de la BD.
      * @return Retourne un objet Note.
      */
     private Note creationNoteParCurseur(Cursor curseur) {
-        return new Note(curseur.getInt(0), curseur.getString(1), curseur.getString(2), curseur.getLong(3), curseur.getLong(4));
+        return new Note(curseur.getInt(0), curseur.getString(1), curseur.getString(2), curseur.getLong(3), curseur.getLong(4), curseur.getString(5));
     }
 
     /**
